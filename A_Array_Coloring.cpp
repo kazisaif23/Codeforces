@@ -8,17 +8,17 @@ void solve()
     int n;
     cin >> n;
     int arr[n];
-    int sum = 0;
+    int cnt = 0;
     for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
         if (arr[i] & 1)
         {
-            sum += arr[i];
+            cnt ++;
         }
     }
 
-    if (!(sum & 1))
+    if (!(cnt & 1))
     {
         cout << "YES\n";
     }
