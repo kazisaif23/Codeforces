@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define fastread() (ios_base::sync_with_stdio(false), cin.tie(NULL));
+using ll = long long;
+using ld = long double;
+using ull = unsigned long long;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using vi = vector<int>;
+using vll = vector<ll>;
+using vvi = vector<vi>;
+using vvll = vector<vll>;
+
+void solve()
+{
+    ll N, q, sum_of_first_array = 0;
+    cin >> N >> q;
+    vll first_array(N);
+    for (ll i = 0; i < N; i++)
+    {
+        cin >> first_array[i];
+        sum_of_first_array += first_array[i];
+    }
+    vll prefix_f_sum(N + 1, 0);
+    for (ll i = 1; i <= N; i++)
+    {
+        prefix_f_sum[i] = prefix_f_sum[i - 1] + first_array[i - 1];
+    }
+    while (q--)
+    {
+        ll l, r, k;
+        cin >> l >> r >> k;
+        ll sum_to_remove = prefix_f_sum[r] - prefix_f_sum[l - 1];
+        ll sum_to_add = (r - l + 1) * k;
+        ll new_sum = sum_of_first_array - sum_to_remove + sum_to_add;
+        if (new_sum & 1)
+            cout << "YES\n";
+        else
+            cout << "NO\n";
+    }
+}
+
+int main()
+{
+    fastread();
+    ll t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+    return 0;
+}
